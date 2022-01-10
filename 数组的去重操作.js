@@ -40,6 +40,7 @@ let removeDuplicatesTwo = function (nums) {
     return i;
 };
 
+// 输出数组长度
 console.log(removeDuplicatesTwo([0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3]));
 console.log(removeDuplicatesTwo([1, 2, 5, 9, 12]));
 console.log(removeDuplicatesTwo('sda'));
