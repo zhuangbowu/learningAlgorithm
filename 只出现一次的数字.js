@@ -3,17 +3,11 @@
  * @return {number}
  */
 let singleNumber = function (nums) {
-    let numBer = 0;
+    let i = 0;
     for (const num of nums) {
-        numBer ^= num;
+        i ^= num;
     }
-    return numBer;
-    // for (let i = 0; i < nums.length; i++) {
-    //     let num = nums.filter(item => item === nums[i]);
-    //     if (num.length === 1) {
-    //         return nums[i];
-    //     }
-    // }
+    return i;
 };
 // 输入: [2,2,1]
 // 输出: 1
