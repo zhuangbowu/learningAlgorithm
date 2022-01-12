@@ -3,11 +3,33 @@
  * @return {boolean}
  */
 let isValidSudoku = function (board) {
-
+    for (let i = 0; i < board.length; i++) {
+        let set = new Set();
+        let setTwo = new Set();
+        let setThree = new Set();
+        for (let j = 0; j < board[i].length; j++) {
+            const a = parseInt(i / 3) * 3 + parseInt(j / 3);
+            const b = parseInt(i % 3) * 3 + parseInt(j % 3);
+            if (set.has(board[i][j]) && board[i][j] !== '.') {
+                return false;
+            } else {
+                set.add(board[i][j]);
+            }
+            if (setTwo.has(board[j][i]) && board[j][i] !== '.') {
+                return false;
+            } else {
+                setTwo.add(board[j][i]);
+            }
+            if (setThree.has(board[a][b]) && board[a][b] !== '.') {
+                return false;
+            } else {
+                setThree.add(board[a][b]);
+            }
+        }
+    }
+    return true;
 };
-
 // 请你判断一个9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。
-//
 // 数字1-9在每一行只能出现一次。
 // 数字1-9在每一列只能出现一次。
 // 数字1-9在每一个以粗实线分隔的3x3宫内只能出现一次。（请参考示例图）
@@ -27,7 +49,7 @@ let isValidSudoku = function (board) {
 // ,[".",".",".","4","1","9",".",".","5"]
 // ,[".",".",".",".","8",".",".","7","9"]]
 // 输出：true
-isValidSudoku(
+console.log(isValidSudoku(
     [
         ["5", "3", ".", ".", "7", ".", ".", ".", "."]
         , ["6", ".", ".", "1", "9", "5", ".", ".", "."]
@@ -39,7 +61,7 @@ isValidSudoku(
         , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
         , [".", ".", ".", ".", "8", ".", ".", "7", "9"]
     ]
-)
+))
 // 输入：board =
 // [["8","3",".",".","7",".",".",".","."]
 // ,["6",".",".","1","9","5",".",".","."]
@@ -52,7 +74,7 @@ isValidSudoku(
 // ,[".",".",".",".","8",".",".","7","9"]]
 // 输出：false
 // 解释：除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。 但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。
-isValidSudoku(
+console.log(isValidSudoku(
     [
         ["8", "3", ".", ".", "7", ".", ".", ".", "."]
         , ["6", ".", ".", "1", "9", "5", ".", ".", "."]
@@ -64,4 +86,4 @@ isValidSudoku(
         , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
         , [".", ".", ".", ".", "8", ".", ".", "7", "9"]
     ]
-)
+))
