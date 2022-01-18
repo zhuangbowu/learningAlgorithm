@@ -3,7 +3,31 @@
  * @return {number}
  */
 let myAtoi = function (s) {
-
+    let arr = [];
+    let empty = true;
+    let positive = '';
+    let sArr = s.split('');
+    for (let i = 0; i < sArr.length; i++) {
+        if (empty && sArr[i] !== ' ') {
+            empty = false;
+        }
+        if (!empty && positive === '' && sArr[i] === '-') {
+            positive = '1';
+        } else if (!empty && positive === '' && (sArr[i] === '+' || new RegExp("[0-9]").test(sArr[i]))) {
+            positive = '2';
+        }
+        if (!empty && positive !== '' && new RegExp("[0-9]").test(sArr[i])) {
+            arr.push(sArr[i])
+        }
+    }
+    if (arr.length < 0) {
+        return 0;
+    }
+    let num = Number(arr.join(''));
+    if (num >= 2147483648) {
+        return (positive === '1' ? -2147483648 : 2147483647);
+    }
+    return (positive === '1' ? -num : num);
 };
 // 请你来实现一个myAtoi(string s)函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）。
 // 函数myAtoi(string s) 的算法如下：
@@ -28,7 +52,7 @@ let myAtoi = function (s) {
 //            ^
 // 解析得到整数 42 。
 // 由于 "42" 在范围 [-231, 231 - 1] 内，最终结果为 42
-console.log(myAtoi('42'));
+console.log(myAtoi("   +-42"));
 //输入：s = "   -42"
 // 输出：-42
 // 解释：
@@ -40,7 +64,7 @@ console.log(myAtoi('42'));
 //                ^
 // 解析得到整数 -42 。
 // 由于 "-42" 在范围 [-231, 231 - 1] 内，最终结果为 -42
-console.log(myAtoi('-42'));
+// console.log(myAtoi('-42'));
 
 // 输入：s = "4193 with words"
 // 输出：4193
@@ -53,7 +77,7 @@ console.log(myAtoi('-42'));
 //              ^
 // 解析得到整数 4193 。
 // 由于 "4193" 在范围 [-231, 231 - 1] 内，最终结果为 4193
-console.log(myAtoi('4193 with words'));
+// console.log(myAtoi('4193 with words'));
 
 // 输入：s = "words and 987"
 // 输出：0
@@ -66,7 +90,7 @@ console.log(myAtoi('4193 with words'));
 //          ^
 // 解析得到整数 0 ，因为没有读入任何数字。
 // 由于 0 在范围 [-231, 231 - 1] 内，最终结果为 0
-console.log(myAtoi('words and 987'));
+// console.log(myAtoi('words and 987'));
 
 // 输入：s = "-91283472332"
 // 输出：-2147483648
@@ -79,4 +103,4 @@ console.log(myAtoi('words and 987'));
 //                      ^
 // 解析得到整数 -91283472332 。
 // 由于 -91283472332 小于范围 [-231, 231 - 1] 的下界，最终结果被截断为 -231 = -2147483648
-console.log(myAtoi('-91283472332'));
+// console.log(myAtoi('-91283472332'));
